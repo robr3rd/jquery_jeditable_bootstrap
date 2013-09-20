@@ -537,7 +537,7 @@
         onblur     : 'cancel',
         loadtype   : 'GET',
         loadtext   : 'Loading...',
-        placeholder: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', // CUSTOM
+        placeholder: '<i class="icon-edit"></i>', // CUSTOM
         indicator  : '<img src="assets/img/indicator.gif" /> Saving...', // CUSTOM
         style      : 'display: inline;',  // CUSTOM
         loaddata   : {},
