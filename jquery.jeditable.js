@@ -538,7 +538,7 @@
         loadtype   : 'GET',
         loadtext   : 'Loading...',
         placeholder: '<i class="icon-edit"></i>', // CUSTOM
-        indicator  : '<img src="assets/img/indicator.gif" /> Saving...', // CUSTOM
+        indicator  : '<i class="icon-spinner icon-spin"></i> Saving...', // CUSTOM
         style      : 'display: inline;',  // CUSTOM
         loaddata   : {},
         submitdata : {},
