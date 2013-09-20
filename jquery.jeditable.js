@@ -421,7 +421,7 @@
                             });
                         /* Otherwise use button with given string as text. */
                         } else {
-                            var submit = $('<button type="submit" />');
+                            var submit = $('<button type="submit" class="btn btn-sm btn-primary" />');
                             submit.html(settings.submit);                            
                         }
                         $(this).append(submit);
@@ -432,7 +432,7 @@
                             var cancel = $(settings.cancel);
                         /* otherwise use button with given string as text */
                         } else {
-                            var cancel = $('<button type="cancel" />');
+                            var cancel = $('<button type="cancel" class="btn btn-sm" />');
                             cancel.html(settings.cancel);
                         }
                         $(this).append(cancel);
@@ -451,7 +451,7 @@
             },
             text: {
                 element : function(settings, original) {
-                    var input = $('<input />');
+                    var input = $('<input class="form-control input-sm" />');
                     if (settings.width  != 'none') { input.attr('width', settings.width);  }
                     if (settings.height != 'none') { input.attr('height', settings.height); }
                     /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
@@ -463,7 +463,7 @@
             },
             textarea: {
                 element : function(settings, original) {
-                    var textarea = $('<textarea />');
+                    var textarea = $('<textarea class="form-control" />');
                     if (settings.rows) {
                         textarea.attr('rows', settings.rows);
                     } else if (settings.height != "none") {
@@ -537,10 +537,33 @@
         onblur     : 'cancel',
         loadtype   : 'GET',
         loadtext   : 'Loading...',
-        placeholder: 'Click to edit',
+        placeholder: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', // CUSTOM
+        indicator  : '<img src="assets/img/indicator.gif" /> Saving...', // CUSTOM
+        style      : 'display: inline;',  // CUSTOM
         loaddata   : {},
         submitdata : {},
         ajaxoptions: {}
     };
 
 })(jQuery);
+
+// Datepicker extension
+// From: http://anotherjsl.blogspot.com/2012/10/jeditable-custom-type-using-bootstrap.html
+$.editable.addInputType('datepicker', {
+    element: function(settings, original) {
+        var input = $('<input class="form-control" style="display:inline" />'); // CUSTOM - added class
+        $(this).append(input);
+        if (settings.width  != 'none') { input.width(settings.width);  } // CUSTOM (from text type above)
+        if (settings.height != 'none') { input.height(settings.height); } // CUSTOM (from text type above)
+        return (input);
+    },
+    plugin: function(settings, original) {
+        settings.onblur = 'ignore';
+        $(this).find('input').datepicker({
+            'autoclose': true, // CUSTOM
+            format: 'mm/dd/yyyy' // CUSTOM
+        }).on('changeDate', function(){ // CUSTOM
+            $(this).submit(); // CUSTOM -- Submits input as soon as a date is selected
+        }); // CUSTOM
+    }
+});
